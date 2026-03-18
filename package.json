@@ -1,0 +1,11 @@
+{
+  "name": "harness-engineering-playbook",
+  "private": true,
+  "scripts": {
+    "serve": "honkit serve",
+    "build": "honkit build"
+  },
+  "devDependencies": {
+    "honkit": "^5.0.0"
+  }
+}
