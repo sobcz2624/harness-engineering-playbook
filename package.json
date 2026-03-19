@@ -6,6 +6,7 @@
     "build": "honkit build"
   },
   "devDependencies": {
+    "gitbook-plugin-expandable-chapters": "^0.2.0",
     "honkit": "^5.0.0"
   }
 }
