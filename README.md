@@ -2,7 +2,7 @@
 
 如何组织 AI 与人类完成可靠的软件交付
 
-**AgentZones 社区集体创作** | 主编：[你的名字]
+**AgentZones 社区集体创作** | 编者: 付权智，马驰
 
 ## 从 Copilot 到 Vibe Coding
 
