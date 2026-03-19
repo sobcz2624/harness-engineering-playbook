@@ -37,4 +37,4 @@
   * [让流程匹配 Agent 速度](chapters/06d-process-speed.md)
   * [先定边界再放 Agent：Conway 定律仍然适用](chapters/06e-conway.md)
   * [没有银弹，但有原则](chapters/06f-principles.md)
-* [超越单个项目：[待定]](chapters/07-beyond.md)
+* [新时代的组织资产](chapters/07-beyond.md)
