@@ -4,8 +4,8 @@
   "scripts": {
     "serve": "honkit serve",
     "build": "honkit build",
-    "lint": "echo 'no linter configured'",
-    "test": "echo 'no tests configured'"
+    "lint": "bash scripts/lint.sh",
+    "test": "bash scripts/test.sh"
   },
   "devDependencies": {
     "gitbook-plugin-expandable-chapters": "^0.2.0",
