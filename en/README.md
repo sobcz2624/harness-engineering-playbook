@@ -1,6 +1,4 @@
-# Introduction: High-Quality Delivery at 100x Productivity
-
-How to organize AI and humans for reliable software delivery
+# Harness Engineering Playbook: Reliable Software Delivery at 100x
 
 **AgentZones Community Collective Work** | Editors: 付权智, 马驰
 
