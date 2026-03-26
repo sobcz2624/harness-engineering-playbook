@@ -1,0 +1,19 @@
+name: Validate Structure
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches: [gitbook]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check SUMMARY.md references
+        run: bash scripts/lint.sh
+
+      - name: Check zh/en chapter sync
+        run: bash scripts/test.sh
