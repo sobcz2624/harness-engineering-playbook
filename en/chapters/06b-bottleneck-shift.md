@@ -6,7 +6,7 @@ Agents make execution cheap. One engineer plus Agents can increase coding output
 
 The bottleneck has shifted from "writing code" to "organizing humans." The team's limiting factor is no longer how many people are writing code, but how humans organize themselves to direct and verify Agent output.
 
-PingCAP CTO 黄东旭 observed a deeper phenomenon in practice. The workflows and best practices of top vibe coders are not the same. Each person has developed their own way of directing Agents: different prompt strategies, different verification workflows, different tool combinations. Two top vibe coders struggle to collaborate within the same module; "the same territory cannot easily accommodate two alpha wolves, resulting in 1+1 < 2."
+PingCAP CTO Ed Huang observed a deeper phenomenon in practice. The workflows and best practices of top vibe coders are not the same. Each person has developed their own way of directing Agents: different prompt strategies, different verification workflows, different tool combinations. Two top vibe coders struggle to collaborate within the same module; "the same territory cannot easily accommodate two alpha wolves, resulting in 1+1 < 2."
 
 This means the traditional linear scaling model of "more people equals more output" has completely broken down. Not just because Agents changed output speed, but because the way humans direct Agents is highly personalized and difficult to standardize and compose.
 
