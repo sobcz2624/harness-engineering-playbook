@@ -30,6 +30,7 @@
   * [把大任务切成 Agent 能消化的块：任务分解](chapters/04b-task-decomposition.md)
   * [上下文不是越多越好：上下文工程](chapters/04c-context-engineering.md)
   * [会话结束了，知识去哪了：跨会话的记忆工程](chapters/04d-memory.md)
+  * [任务没跑完，进度去哪了：任务级交接文档](chapters/task-handoff/04d1-task-handoff.md)
   * [Session 不是聊天记录：把执行单元工程化](chapters/04e-session.md)
   * [从陪聊到放手：执行模式的转变](chapters/04f-letting-go.md)
 * [多 Agent 并行：隔离与集成](chapters/05-multi-agent.md)

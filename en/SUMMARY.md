@@ -30,6 +30,7 @@
   * [Cutting Big Tasks into Agent-Sized Chunks: Task Decomposition](chapters/04b-task-decomposition.md)
   * [More Context Is Not Always Better: Context Engineering](chapters/04c-context-engineering.md)
   * [Session Over, Where Did the Knowledge Go: Cross-Session Memory Engineering](chapters/04d-memory.md)
+  * [When a Task Doesn't Finish: Task-Level Handoff Documents](chapters/task-handoff/04d1-task-handoff.md)
   * [A Session Is Not a Chat Log: Engineering the Execution Unit](chapters/04e-session.md)
   * [From Hand-Holding to Letting Go: The Shift in Execution Mode](chapters/04f-letting-go.md)
 * [Multi-Agent Parallelism: Isolation and Integration](chapters/05-multi-agent.md)
