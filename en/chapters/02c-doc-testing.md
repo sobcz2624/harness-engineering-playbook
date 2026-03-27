@@ -16,4 +16,4 @@ Doc testing has clear limitations. AI may hallucinate during the walkthrough: it
 
 Every issue discovered through doc testing needs to be written back into the spec. If doc testing reveals a missing boundary condition, the fix is to add the corresponding entry to the spec's acceptance_criteria, not to mentally note "remember to watch for this next time." The spec is the single source of truth; all knowledge and decisions must be captured in the spec.
 
-[^1]: The doc testing concept was proposed by 胥克谦 (AgentZones community).
+[^1]: The doc testing concept was proposed by 胥克谦 (AgentsZone community).

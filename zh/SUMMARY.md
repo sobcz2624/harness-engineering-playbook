@@ -1,6 +1,6 @@
 # 目录
 
-* [引言: 高质量交付 100x 生产力](README.md)
+* [Harness Engineering 手册](README.md)
 * [AI 的结构性特征与工程挑战](chapters/01-framework.md)
   * [Agent 是怎么工作的](chapters/01a-how-agents-work.md)
   * [AI的结构性特征](chapters/01b-characteristics.md)
