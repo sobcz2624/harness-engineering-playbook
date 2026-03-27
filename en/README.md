@@ -2,7 +2,7 @@
 
 How to organize AI and humans for reliable software delivery
 
-**AgentsZone Community Collective Work** | Editors: 付权智, 马驰
+**AgentsZone Community Collective Work** | Editors: Quanzhi Fu, Chi Ma
 
 > **Warning: Early Draft** This book is in its architecture validation phase. The introduction and table of contents structure are largely in place, and feedback on the overall framework is welcome. Chapter content consists of AI-assisted first drafts that lack detail, examples, and readability polish. These will be supplemented and refined chapter by chapter by practitioner contributors in subsequent versions.
 
@@ -12,7 +12,7 @@ Over the past two years, the capability frontier of AI coding tools has been con
 
 But when teams actually review their delivery data, a puzzling phenomenon emerges. PR counts go up, review times get longer, bug rates climb. The models are stronger, the tools are better, it feels faster, yet the overall productivity gain has fallen far short.
 
-Meanwhile, another group of people have produced entirely different results with the same tools. PingCAP CTO 黄东旭 used AI to rewrite TiDB's PostgreSQL compatibility layer into near-production-quality Rust code. Pigsty founder 冯若航 single-handedly maintains an enterprise-grade PostgreSQL distribution integrating over 460 extensions, routinely orchestrating ten Agents working in parallel. Their productivity gains are measured in tens of multiples, and what they ship is production-deployed, battle-tested code.
+Meanwhile, another group of people have produced entirely different results with the same tools. PingCAP CTO Ed Huang used AI to rewrite TiDB's PostgreSQL compatibility layer into near-production-quality Rust code. Pigsty founder Ruohang Feng single-handedly maintains an enterprise-grade PostgreSQL distribution integrating over 460 extensions, routinely orchestrating ten Agents working in parallel. Their productivity gains are measured in tens of multiples, and what they ship is production-deployed, battle-tested code.
 
 Both sides reflect genuine experiences. You feel like you can only manage 1.5x, and you are right. They achieved tens of multiples and shipped to production, and that is also right. Same models, same tools, so where does the gap come from? Conversations with over a hundred developers in the AgentZones community have provided a clear answer. This book systematically distills the methodology and engineering practices for going from 1.5x to 100x.
 

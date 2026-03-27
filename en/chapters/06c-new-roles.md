@@ -4,9 +4,9 @@ Traditional team roles are designed around the execution layer: who writes front
 
 There are currently two main directions of exploration in the industry.
 
-**The Alpha Wolf Model.** 黄东旭's practice at PingCAP represents this direction: a top-tier engineer takes end-to-end ownership of a product or module. This person simultaneously plays the roles of product manager, architect, lead programmer, and test lead, commanding a pack of Agents within their own territory. They spend 90% of their time evaluating AI work output rather than writing code.
+**The Alpha Wolf Model.** Ed Huang's practice at PingCAP represents this direction: a top-tier engineer takes end-to-end ownership of a product or module. This person simultaneously plays the roles of product manager, architect, lead programmer, and test lead, commanding a pack of Agents within their own territory. They spend 90% of their time evaluating AI work output rather than writing code.
 
-The advantage of the alpha wolf model is an extremely short decision chain. One person has the complete context, needs no cross-role communication, needs no approval waiting, and can iterate at very high speed. 黄东旭 used this model to rewrite TiDB's PostgreSQL compatibility layer to near-production level.
+The advantage of the alpha wolf model is an extremely short decision chain. One person has the complete context, needs no cross-role communication, needs no approval waiting, and can iterate at very high speed. Ed Huang used this model to rewrite TiDB's PostgreSQL compatibility layer to near-production level.
 
 The bottleneck of the alpha wolf model is talent. This role requires a combination of product sense, architectural capability, coding experience, and quality awareness. People who meet these criteria are exceptionally rare, and such individuals often prefer starting their own ventures to working for others. Most companies' teams cannot find or retain such people.
 

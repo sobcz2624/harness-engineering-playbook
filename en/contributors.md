@@ -4,14 +4,14 @@ This book is a collective work by the AgentsZone community. The following commun
 
 ## Editors
 
-- 付权智
-- 马驰
+- Quanzhi Fu
+- Chi Ma
 
 ## Theory and Practice Contributions
 
 | Contributor | Contributions |
 |-------------|---------------|
-| 胥克谦 | Doc testing, context reasoning contamination, agile-waterfall model |
+| Keqian Xu | Doc testing, context reasoning contamination, agile-waterfall model |
 
 ## How to Contribute
 
