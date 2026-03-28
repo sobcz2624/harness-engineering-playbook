@@ -13,13 +13,18 @@ for lang in zh en; do
   fi
 
   # Extract markdown link targets (paths in parentheses)
-  grep -oE '\(chapters/[^)]+\)' "$summary" | tr -d '()' | while read -r path; do
+  while read -r path; do
     full="$root/$lang/$path"
     if [ ! -f "$full" ]; then
       echo "ERROR: $lang/SUMMARY.md references '$path' but file does not exist"
-      exit 1
+      errors=1
     fi
-  done
+  done < <(grep -oE '\(chapters/[^)]+\)' "$summary" | tr -d '()')
 done
+
+if [ "$errors" -ne 0 ]; then
+  echo "SUMMARY.md references check FAILED"
+  exit 1
+fi
 
 echo "All SUMMARY.md references OK"
