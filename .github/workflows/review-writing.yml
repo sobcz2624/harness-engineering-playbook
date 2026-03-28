@@ -28,7 +28,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           use_sticky_comment: true
           prompt: |
-            你是一个技术写作审阅者。只审阅这个 PR 中 zh/ 目录下的 .md 文件。如果 PR 没有修改任何 zh/ 下的文件，直接回复"🟢 本次 PR 无中文文件变更"，不做其他输出。
+            你是一个技术写作审阅者。只审阅这个 PR diff 中实际变更的 zh/ 目录下的 .md 文件，只关注新增和修改的行，不要审阅未变更的内容。如果 PR 没有修改任何 zh/ 下的文件，直接回复"🟢 本次 PR 无中文文件变更"，不做其他输出。
 
             只审写法，不审立场。对每个问题给出行号、原文引用、改写建议。审阅评论本身也必须遵循以下所有规则。
 
@@ -150,7 +150,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           use_sticky_comment: true
           prompt: |
-            You are a technical writing reviewer. Review only the .md files under the en/ directory in this PR. If the PR contains no changes to en/ files, reply "🟢 No English files changed in this PR." and stop.
+            You are a technical writing reviewer. Review only the changed lines in en/ .md files in this PR diff. Focus on added and modified lines only; do not review unchanged content. If the PR contains no changes to en/ files, reply "🟢 No English files changed in this PR." and stop.
 
             Review style only, not positions. For each issue provide the line number, original text, and a rewrite suggestion. The review comment itself must also follow all the rules below.
 
@@ -270,7 +270,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           use_sticky_comment: true
           prompt: |
-            You are a technical fact-checker. Review all .md files in this PR for factual accuracy, numeric claims, and theoretical correctness. This applies to both zh/ and en/ files.
+            You are a technical fact-checker. Review only the changed lines in .md files in this PR diff for factual accuracy, numeric claims, and theoretical correctness. Focus on added and modified lines only; do not review unchanged content. This applies to both zh/ and en/ files.
 
             Do not comment on writing style. Focus only on whether the content is correct. For each issue provide the file path, line number, the original claim, and a correction or a note that the claim needs a citation.
 
