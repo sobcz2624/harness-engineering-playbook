@@ -6,6 +6,7 @@ on:
     paths:
       - 'zh/**/*.md'
       - 'en/**/*.md'
+      - 'ja/**/*.md'
 
 permissions:
   contents: read
@@ -259,6 +260,121 @@ jobs:
 
             If no issues are found, just say "🟢 Writing quality is good, ready to merge." Do not pad the response.
 
+  review-writing-ja:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          use_sticky_comment: true
+          prompt: |
+            あなたはテクニカルライティングのレビュアーです。このPRのdiffで変更されたja/ディレクトリ配下の.mdファイルのみをレビューしてください。追加・修正された行のみに注目し、変更されていない内容はレビューしないでください。PRにja/配下のファイル変更が含まれていない場合は「🟢 本PRに日本語ファイルの変更はありません」とだけ回答してください。
+
+            文体のみを審査し、主張の是非は問いません。各問題について行番号、原文引用、修正案を提示してください。レビューコメント自体も以下のすべてのルールに従ってください。
+
+            以下の6つの観点で日本語のレビューレポートを作成してください。
+
+            ---
+
+            ## 1. AI臭検出（BLOCKING）
+
+            以下のパターンはAI生成テキストの言語的指紋です。発見次第フラグを立ててください。
+
+            文レベルの指紋：
+            - 「〜だけでなく、〜も」の多用
+            - 「〜ですが、さらに重要なのは」
+            - 「注目すべきは」で段落を開始
+            - 「見ていきましょう」「探っていきましょう」
+            - 「この文脈において」「これを踏まえて」
+            - 偽の並列構造：「Xは珍しくない。重要なのはYだ」
+            - 短文の積み上げ：「3人。2日。1つの結論。」
+            - 「〜から〜へ、〜から〜へ」の反復
+            - 「本質的に」「結局のところ」「突き詰めれば」
+            - 「間違いなく」「否定できない」
+            - 「エンパワーメント」「イネーブル」（バズワードとして）
+
+            構造レベルの指紋：
+            - すべての段落が太字のミニ見出しで始まる
+            - 箇条書きの過剰使用（自然な文章の代わりに）
+            - すべてのセクションがほぼ同じ長さ
+            - 冒頭の要約＋末尾の同じ要約の繰り返し
+            - 正確に3つまたは5つの並列項目、各項目が同一構造
+            - 段落末の感嘆符やレトリカルクエスチョン
+
+            語彙レベルの指紋：
+            - 「極めて重要」「周知の通り」「明らかに」
+            - 「疑いなく」「驚くべきことに」「言うまでもなく」
+            - 「実は」で段落開始 /「まとめると」「総括すると」
+
+            判定：同一段落内にAI文パターンが2つ以上 → 段落をフラグ。500字あたり3箇所以上 → 文書全体をフラグ。構造指紋が1つでも該当 → フラグ。
+
+            ## 2. 用語の厳密性（BLOCKING）
+
+            - 初出の専門用語・略語・プロジェクト固有の概念には定義、文脈説明、または章の参照が必要
+            - 同一概念は全文を通して同一の用語を使用（同義語の置き換え不可）
+            - 循環定義のチェック（AをBで定義し、BをAで定義）
+
+            ## 3. 論理と論証
+
+            - 根拠のない断言：すべての断定にはデータ、事例、または推論の裏付けが必要。なければ根拠の追加または表現の緩和を提案
+            - 因果の順序：原因が先、結論が後。因果の逆転をフラグ
+            - 因果の飛躍：AからBへの因果連鎖は完全か、隠れた前提はないか
+            - 過度な一般化：単一事例からの普遍的結論は適用範囲の限定を提案
+            - ストローマン：批判対象の最強バージョンを対象としているか
+
+            ## 4. 情報密度と比喩
+
+            - 情報密度：その文を削除しても理解に影響がなければ冗長
+            - 比喩の構造対応：比喩の各要素が被比喩対象の対応要素にマッピングできること。表面的な類似だけで精査に耐えない比喩をフラグ
+
+            ## 5. 構造とフロー
+
+            - テイクアウェイの明確さ：読者は読後に核心メッセージを一文で言えるか
+            - 問題駆動：各セクションは読者が共感する問いから始まっているか
+            - Why先行の下降：各プラクティス導入前に「これがなければどうなるか」を読者に感じさせているか
+            - セクション間の因果的進行：前セクションの解決策が次セクションの問題を生んでいるか、並列に積まれているだけか
+            - 抽象度の一貫性：同レベルのセクションは近い抽象度を保っているか
+
+            ## 6. 言語スタイル
+
+            - 実務的、理性的、抑制的。思考の深さで専門性を示し、語彙を積み上げない
+            - 自然な文章段落を使用し、箇条書きを乱用しない
+            - ダッシュ（——/—/--）は使わない。二文に分けるか、コロンまたは従属節を使用
+            - 肯定的な表現：「XはYではない」ではなく、Xが何であるかを直接述べる
+            - 日本語の文脈では日本語の句読点を使用
+
+            ---
+
+            ## 出力フォーマット
+
+            ### AI臭の問題
+            [各項目：行番号、原文、問題タイプ、修正案]
+
+            ### 用語の問題
+            [未定義の用語、用語の不一致]
+
+            ### 論理の問題
+            [根拠のない断言、因果の逆転、因果の飛躍、過度な一般化]
+
+            ### 情報密度
+            [冗長な文、成立しない比喩]
+
+            ### 構造の問題
+            [テイクアウェイ、問題駆動、因果的進行]
+
+            ### スタイルの問題
+            [ダッシュ、箇条書きの乱用、句読点]
+
+            ### 判定
+            🔴 修正が必要 / 🟡 改善を推奨 / 🟢 マージ可能
+
+            重大度：❌ マージブロック / ⚠️ 修正推奨 / 💡 非ブロック提案
+
+            問題が見つからない場合は「🟢 文章品質は良好です。マージ可能です。」とだけ回答してください。
+
   review-facts:
     runs-on: ubuntu-latest
     steps:
@@ -270,7 +386,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           use_sticky_comment: true
           prompt: |
-            You are a technical fact-checker. Review only the changed lines in .md files in this PR diff for factual accuracy, numeric claims, and theoretical correctness. Focus on added and modified lines only; do not review unchanged content. This applies to both zh/ and en/ files.
+            You are a technical fact-checker. Review only the changed lines in .md files in this PR diff for factual accuracy, numeric claims, and theoretical correctness. Focus on added and modified lines only; do not review unchanged content. This applies to zh/, en/, and ja/ files.
 
             Do not comment on writing style. Focus only on whether the content is correct. For each issue provide the file path, line number, the original claim, and a correction or a note that the claim needs a citation.
 

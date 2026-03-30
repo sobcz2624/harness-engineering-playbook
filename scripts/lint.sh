@@ -5,7 +5,7 @@ set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 errors=0
 
-for lang in zh en; do
+for lang in zh en ja; do
   summary="$root/$lang/SUMMARY.md"
   if [ ! -f "$summary" ]; then
     echo "WARN: $summary not found, skipping"

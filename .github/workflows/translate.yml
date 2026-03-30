@@ -1,0 +1,107 @@
+name: Translate Book Content
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - 'en/**'
+      - 'zh/**'
+      - 'ja/**'
+
+concurrency:
+  group: translate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Detect changed language files
+        id: detect
+        run: |
+          BASE=${{ github.event.pull_request.base.sha }}
+          HEAD=${{ github.event.pull_request.head.sha }}
+          CHANGED=$(git diff --name-only "$BASE" "$HEAD" -- 'en/' 'zh/' 'ja/' || true)
+
+          if [ -z "$CHANGED" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Count how many language directories were changed
+          LANG_COUNT=$(echo "$CHANGED" | sed 's|/.*||' | sort -u | wc -l | tr -d ' ')
+
+          # If multiple languages changed, this is likely a translation commit — skip to avoid loops
+          if [ "$LANG_COUNT" -gt 1 ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Multi-language changes detected — skipping to avoid translation loops"
+            exit 0
+          fi
+
+          # Determine source and targets
+          SOURCE=$(echo "$CHANGED" | head -1 | sed 's|/.*||')
+          case "$SOURCE" in
+            en) TARGETS="zh ja" ;;
+            zh) TARGETS="en ja" ;;
+            ja) TARGETS="en zh" ;;
+          esac
+
+          CHANGED_FILES=$(echo "$CHANGED" | tr '\n' ',' | sed 's/,$//')
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "source=$SOURCE" >> "$GITHUB_OUTPUT"
+          echo "targets=$TARGETS" >> "$GITHUB_OUTPUT"
+          echo "files=$CHANGED_FILES" >> "$GITHUB_OUTPUT"
+
+      - name: Translate with Claude Code
+        if: steps.detect.outputs.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          direct_prompt: |
+            Translate book content that was updated in this PR.
+
+            Source language: ${{ steps.detect.outputs.source }}
+            Target languages: ${{ steps.detect.outputs.targets }}
+            Changed files: ${{ steps.detect.outputs.files }}
+
+            Instructions:
+            1. Read each changed source file listed above
+            2. For each target language, translate the content and write it to the corresponding path
+               (e.g. en/chapters/01-framework.md → zh/chapters/01-framework.md and ja/chapters/01-framework.md)
+            3. If the target file already exists, replace its content with the new translation
+            4. If the target file does not exist, create it (and any needed directories)
+            5. After writing all translations, commit and push to the current PR branch
+
+            Translation guidelines (also see CLAUDE.md in repo root):
+            - Keep technical terms in English where standard in the target language's tech discourse
+            - For Chinese (zh): simplified Chinese, professional but accessible tone
+            - For Japanese (ja): professional technical book style, です/ます form for explanatory text
+            - For English (en): clear, concise, professional technical writing
+            - Preserve all Markdown formatting, links, and file path references exactly
+            - Translate heading text but keep file paths unchanged
+            - Do NOT translate contributor names or project names
+
+            Commit with message: "translate: sync ${{ steps.detect.outputs.source }} → ${{ steps.detect.outputs.targets }}"
+            Push to the current branch (already checked out).
+
+          allowed_tools: |
+            Bash(git add:*)
+            Bash(git commit:*)
+            Bash(git push:*)
+            Bash(mkdir:*)
+            Read
+            Write
+            Edit
+            Glob
+            Grep
