@@ -2,7 +2,7 @@
 
 **Reliable Software Delivery at 100x: How to Organize AI and Humans for Production-Grade Output**
 
-**An [AgentZones.ai](https://agentzones.ai) Community Publication**
+**An [AgentsZone.ai](https://agentszone.ai) Community Publication**
 
 [![Read Online](https://img.shields.io/badge/Read_Online-GitHub_Pages-blue)](https://lipingtababa.github.io/harness-engineering-playbook/)
 
@@ -63,8 +63,8 @@ Then open [http://localhost:4000](http://localhost:4000) in your browser.
 
 ## About
 
-A collective work by the **[AgentZones.ai](https://agentzones.ai)** community — a practitioner community focused on AI-native software engineering. Built from real-world experience across teams that have made the transition from vibe coding to production-grade agent-driven delivery.
+A collective work by the **[AgentsZone.ai](https://agentszone.ai)** community — a practitioner community focused on AI-native software engineering. Built from real-world experience across teams that have made the transition from vibe coding to production-grade agent-driven delivery.
 
 ## License
 
-All rights reserved by the AgentZones.ai community.
+All rights reserved by the AgentsZone.ai community.
